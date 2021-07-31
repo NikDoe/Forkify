@@ -1,4 +1,4 @@
-import icons from 'url:../img/icons.svg';
+import icons from '../img/icons.svg';
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
@@ -31,10 +31,16 @@ const renderSpinner = function(parentEl){
 const showRecipe = async function() {
   try {
 
+    //1. get hash form the url
+    const id = window.location.hash.slice(1)
+
+    //3. create guard for empty hash
+    if (!id) return;
+
     renderSpinner(recipeContainer);
 
     const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bce32'
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
     const data = await res.json();
 
@@ -152,4 +158,8 @@ const showRecipe = async function() {
   }
 };
 
-showRecipe();
+// window.addEventListener('hashchange', showRecipe);
+// window.addEventListener('load', showRecipe);
+
+//2. solution listening for multi events
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe))
