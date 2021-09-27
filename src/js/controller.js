@@ -4,6 +4,7 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView';
 import resultsView from './views/resultsView';
+import paginationView from './views/paginationView';
 
 // https://forkify-api.herokuapp.com/v2
 
@@ -41,7 +42,10 @@ const controlSearchResults = async function() {
     await model.loadSearchResults(query)
 
     //3. render results
-    resultsView.render(model.getSearchResultPage());
+    resultsView.render(model.getSearchResultPage(3));
+
+    //4. render initial pagination buttons
+    paginationView.render(model.state.search);
   }
   catch (err) {
     console.error(err)
