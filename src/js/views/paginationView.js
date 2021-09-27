@@ -4,6 +4,14 @@ import View from './View';
 class PaginationView extends View{
   _parentElement = document.querySelector('.pagination');
 
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', e => {
+      const btn = e.target.closest('.btn--inline');
+      console.log(btn);
+      handler();
+    })
+  }
+
   _generateMarkup(){
     const currPage = this._data.page;
     const numPages = Math.ceil(this._data.results.length / this._data.resultPerGage);
