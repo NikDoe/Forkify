@@ -30,6 +30,8 @@ export const loadRecipe = async function(id) {
       ingredients: recipe.ingredients
     };
 
+    state.recipe.bookmarked = state.bookMarks.some(bookMark => { return bookMark.id === id});
+
   } catch (err) {
     throw err;
   }
