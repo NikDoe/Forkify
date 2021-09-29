@@ -77,7 +77,7 @@ export const addBookmark = function(recipe) {
   //add bookmark
   state.bookMarks.push(recipe)
 
-  //add current recipe as boolmark
+  //add current recipe as bookmark
   if(recipe.id === state.recipe.id) {
     state.recipe.bookmarked = true;
   }
