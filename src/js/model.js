@@ -47,7 +47,9 @@ export const loadSearchResults = async function (query){
         publisher: recipe.publisher,
         image: recipe.image_url,
       }
-    })
+    });
+
+    state.search.page = 1;
   }
   catch (err) {
 throw err;
