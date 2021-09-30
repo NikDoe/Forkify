@@ -41,7 +41,7 @@ const controlSearchResults = async function() {
   try {
     resultsView.renderSpinner();
     //1. get search query
-    const query = searchView.getQuery()
+    const query = searchView.getQuery();
     if(!query) return;
 
     //2. load search result
@@ -91,8 +91,14 @@ const controlBookmark = function() {
   bookmarksView.render(model.state.bookMarks);
 }
 
-const controlAddRecipe =  function(newRecipe) {
-  console.log(newRecipe);
+const controlAddRecipe = async function(newRecipe) {
+  try{
+    //upload new recipe
+    await model.uploadRecipe(newRecipe);
+  }
+  catch (err){
+    addRecipeView.renderError(err.message);
+  }
 }
 
 const init = function(){
