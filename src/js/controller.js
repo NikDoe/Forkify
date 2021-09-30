@@ -8,6 +8,7 @@ import paginationView from './views/paginationView';
 import bookmarksView from './views/bookmarksView';
 import addRecipeView from './views/addRecipeView';
 import { MODAL_CLOSE_SEC } from './config';
+import { timeoutFunction } from './helpers';
 
 ///////////////////////////////////////
 
@@ -111,10 +112,13 @@ const controlAddRecipe = async function(newRecipe) {
     //change ID in URL
     window.history.pushState(null, '', `#${model.state.recipe.id}`)
 
-    //close the window
+    //close the window and render Form
     setTimeout(()=>{
       addRecipeView.toggleWindow();
-    }, MODAL_CLOSE_SEC * 1000)
+      setTimeout(()=>{
+        addRecipeView.render(true);
+      }, 1000);
+    }, MODAL_CLOSE_SEC * 1000);
   }
   catch (err){
     addRecipeView.renderError(err.message);
